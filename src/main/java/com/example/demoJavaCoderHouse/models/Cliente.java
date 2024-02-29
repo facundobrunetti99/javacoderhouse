@@ -8,39 +8,34 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-
 
 @Entity
 @Table(name = "Cliente")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-      @Schema(description = "id usuario autogestionado por la BBDD",requiredMode = Schema.RequiredMode.AUTO, example = "2")
+    @Schema(description = "id usuario autogestionado por la BBDD", requiredMode = Schema.RequiredMode.AUTO, example = "2")
     private Long id;
 
     @Column(name = "Nombre")
-    @Schema(description = "Nombre del cliente",requiredMode = Schema.RequiredMode.REQUIRED, example = "Facundo")
+    @Schema(description = "Nombre del cliente", requiredMode = Schema.RequiredMode.REQUIRED, example = "Facundo")
     private String clienteNombre;
 
     @Column(name = "Domicilio")
     private String clienteDomicilio;
 
-    @Column(name="Dni")
-    @Schema(description = "Número de documento del cliente", requiredMode = Schema.RequiredMode.REQUIRED,example = "27366988")
+    @Column(name = "Dni")
+    @Schema(description = "Número de documento del cliente", requiredMode = Schema.RequiredMode.REQUIRED, example = "27366988")
     private int clienteDni;
 
-    @Schema(description = "Fecha de nacimiento", requiredMode = Schema.RequiredMode.REQUIRED,example = "13-05-1990")
+    @Schema(description = "Fecha de nacimiento", requiredMode = Schema.RequiredMode.REQUIRED, example = "13-05-1990")
     @Column(name = "FechaNac")
     private String FechaNac;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private VentaProducto ventaProducto;
+ 
 
-  
-
-    
 
     public String getClienteNombre() {
         return clienteNombre;
@@ -66,15 +61,6 @@ public class Cliente {
         FechaNac = fechaNac;
     }
 
-    public VentaProducto getVentaProducto() {
-        return ventaProducto;
-    }
-
-    public void setVentaProducto(VentaProducto ventaProducto) {
-        this.ventaProducto = ventaProducto;
-    }
-
-   
 
     public Long getId() {
         return id;
@@ -95,16 +81,13 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Long id, String clienteNombre, String clienteDomicilio, int clienteDni, String fechaNac,
-            VentaProducto ventaProducto) {
+    public Cliente(Long id, String clienteNombre, String clienteDomicilio, int clienteDni, String fechaNac) {
         this.id = id;
         this.clienteNombre = clienteNombre;
         this.clienteDomicilio = clienteDomicilio;
         this.clienteDni = clienteDni;
         FechaNac = fechaNac;
-        this.ventaProducto = ventaProducto;
+      
     }
-    
-    
 
 }

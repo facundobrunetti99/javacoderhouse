@@ -3,6 +3,7 @@ package com.example.demoJavaCoderHouse.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,7 +31,8 @@ public class VentaProducto {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ventaProducto")
     private Set<producto> productos = new HashSet<>();
 
+    @OneToOne(mappedBy = "ventaProducto",cascade = CascadeType.ALL)
+    private Cliente cliente;
+ 
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ventaProducto")
-private Set<Cliente> clientes = new HashSet<>();
 }

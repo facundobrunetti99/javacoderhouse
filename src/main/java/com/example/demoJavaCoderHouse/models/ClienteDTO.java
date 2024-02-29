@@ -1,45 +1,49 @@
 package com.example.demoJavaCoderHouse.models;
-import io.swagger.v3.oas.annotations.media.Schema;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 
 //Establezco Entidad para la tabla Clientes
 
 public class ClienteDTO {
-    @Schema(description = "Nombre del Cliente",requiredMode = Schema.RequiredMode.REQUIRED, example = "Facundo")
+    @Schema(description = "Nombre del Cliente", requiredMode = Schema.RequiredMode.REQUIRED, example = "Facundo")
     private String nombre;
+    @Schema(description = "Domicilio del cliente", requiredMode = Schema.RequiredMode.REQUIRED, example = "Calle 1234")
+    private String domicilio;
 
-    @Schema(description = "Apellido del Cliente",requiredMode = Schema.RequiredMode.REQUIRED, example = "Brunetti")
-    private String apellido;
+    @Schema(description = "Número de documento del Cliente", requiredMode = Schema.RequiredMode.REQUIRED, example = "1235689")
+    private int dni;
 
+    public ClienteDTO() {
+    }
 
-    @Schema(description = "Número de documento del Cliente", requiredMode = Schema.RequiredMode.REQUIRED,example = "1235689")
-    private String dni;
-
-    public ClienteDTO(){}
-    public ClienteDTO(String nom, String apel, String dni){
-        this.nombre = nom;
-        this.apellido = apel;
+    public ClienteDTO(String nombre, String domicilio, int dni) {
+        this.nombre = nombre;
+        this.domicilio = domicilio;
         this.dni = dni;
     }
+
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getApellido() {
-        return apellido;
-    }
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-    public String getDni() {
+
+    public int getDni() {
         return dni;
     }
-    public void setDni(String dni) {
+
+    public void setDni(int dni) {
         this.dni = dni;
     }
 
-    
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demoJavaCoderHouse.models.VentaProducto;
-import com.example.demoJavaCoderHouse.models.producto;
+
 import com.example.demoJavaCoderHouse.repository.VentaProductoRepository;
 
 @RestController
