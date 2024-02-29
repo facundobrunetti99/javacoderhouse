@@ -1,5 +1,6 @@
 package com.example.demoJavaCoderHouse.models;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,27 +17,30 @@ import jakarta.persistence.Table;
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clienteDni;
+      @Schema(description = "id usuario autogestionado por la BBDD",requiredMode = Schema.RequiredMode.AUTO, example = "2")
+    private Long id;
 
     @Column(name = "Nombre")
+    @Schema(description = "Nombre del cliente",requiredMode = Schema.RequiredMode.REQUIRED, example = "Facundo")
     private String clienteNombre;
 
     @Column(name = "Domicilio")
     private String clienteDomicilio;
 
+    @Column(name="Dni")
+    @Schema(description = "Número de documento del cliente", requiredMode = Schema.RequiredMode.REQUIRED,example = "27366988")
+    private int clienteDni;
+
+    @Schema(description = "Fecha de nacimiento", requiredMode = Schema.RequiredMode.REQUIRED,example = "13-05-1990")
     @Column(name = "FechaNac")
     private String FechaNac;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private VentaProducto ventaProducto;
 
-    public Long getClienteDni() {
-        return clienteDni;
-    }
+  
 
-    public void setClienteDni(Long clienteDni) {
-        this.clienteDni = clienteDni;
-    }
+    
 
     public String getClienteNombre() {
         return clienteNombre;
@@ -70,17 +74,37 @@ public class Cliente {
         this.ventaProducto = ventaProducto;
     }
 
-    public Cliente(Long clienteDni, String clienteNombre, String clienteDomicilio, String fechaNac,
-            VentaProducto ventaProducto) {
+   
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getClienteDni() {
+        return clienteDni;
+    }
+
+    public void setClienteDni(int clienteDni) {
         this.clienteDni = clienteDni;
-        this.clienteNombre = clienteNombre;
-        this.clienteDomicilio = clienteDomicilio;
-        FechaNac = fechaNac;
-        this.ventaProducto = ventaProducto;
     }
 
     public Cliente() {
     }
- 
+
+    public Cliente(Long id, String clienteNombre, String clienteDomicilio, int clienteDni, String fechaNac,
+            VentaProducto ventaProducto) {
+        this.id = id;
+        this.clienteNombre = clienteNombre;
+        this.clienteDomicilio = clienteDomicilio;
+        this.clienteDni = clienteDni;
+        FechaNac = fechaNac;
+        this.ventaProducto = ventaProducto;
+    }
+    
+    
 
 }

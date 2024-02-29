@@ -1,5 +1,6 @@
 package com.example.demoJavaCoderHouse.models;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,10 +16,16 @@ import jakarta.persistence.Table;
 public class producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+     @Schema(description = "Codigo del Producto",requiredMode = Schema.RequiredMode.REQUIRED, example = "12574963")
     private Long Idproduct;
+
     @Column(name = "nameproduct")
+    @Schema(description = "Nombre del producto",requiredMode = Schema.RequiredMode.REQUIRED, example = "Microondas")
     private String nameproduct;
+
     @Column(name = "priceproduct")
+    @Schema(description = "Precio del producto",requiredMode = Schema.RequiredMode.REQUIRED, example = "$1550")
     private float priceproduct;
     @Column(name = "cantproduct")
     private int cantproduct;
