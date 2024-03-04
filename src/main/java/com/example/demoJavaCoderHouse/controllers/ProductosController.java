@@ -1,8 +1,10 @@
 package com.example.demoJavaCoderHouse.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,36 +12,37 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demoJavaCoderHouse.models.Cliente;
+import com.example.demoJavaCoderHouse.models.ProductoDTO;
 import com.example.demoJavaCoderHouse.models.producto;
 import com.example.demoJavaCoderHouse.repository.ProductoRepository;
+import com.example.demoJavaCoderHouse.service.ProductoService;
 
 @RestController
 public class ProductosController {
-        @Autowired
-        private ProductoRepository prodrepo;
+    @Autowired
+    private ProductoService prodService;
 
 
-        
     @GetMapping("/productos")
-    public List<producto> getClientes(){
-        return  prodrepo.findAll();
+    public Set<ProductoDTO> getClientes() {
+        return prodService.listaProductos();
     }
 
     @PostMapping("producto/alta")
-    public String post(@RequestBody producto prod){
-        prodrepo.save(prod);
+    public String post(@RequestBody producto prod) {
+        prodService.CargarProducto(prod);
         return "Alta realizada";
     }
 
     @PutMapping("producto/modificar/{id}")
     public String update(@PathVariable Long id, @RequestBody producto prod) {
-       producto updateProducto= prodrepo.findById(id).get();
-    updateProducto.setCantproduct(prod.getCantproduct());
-    updateProducto.setNameproduct(prod.getNameproduct());
-    updateProducto.setPriceproduct(prod.getPriceproduct());
+       prodService.ActualizarProducto(id, prod);
         return "Se realizo el cambio";
     }
 
-
+    @DeleteMapping("producto/eliminar/{id}")
+    public String delete(@PathVariable Long id){
+        prodService.EliminarProducto(id);
+        return "El producto se elimino correctamente";
+    }
 }

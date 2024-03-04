@@ -12,18 +12,20 @@ import com.example.demoJavaCoderHouse.models.VentaProducto;
 
 import com.example.demoJavaCoderHouse.repository.VentaProductoRepository;
 
+import io.micrometer.common.lang.NonNull;
+
 @RestController
 public class VentaProductoController {
     @Autowired
-    private VentaProductoRepository ventaprodrepo;
+    private VentaProductoRepository   ventaprodrepo;
 
     @GetMapping("/ventas")
-    public List<VentaProducto> getVentaProductos(){
-        return  ventaprodrepo.findAll();
+    public List<VentaProducto> getVentaProductos() {
+        return ventaprodrepo.findAll();
     }
 
     @PostMapping("venta/alta")
-    public String post(@RequestBody VentaProducto ventaprod){
+    public String post(@RequestBody VentaProducto ventaprod) {
         ventaprodrepo.save(ventaprod);
         return "Alta realizada";
     }
