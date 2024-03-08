@@ -13,14 +13,18 @@ public class ClienteDTO {
     @Schema(description = "Número de documento del Cliente", requiredMode = Schema.RequiredMode.REQUIRED, example = "1235689")
     private int dni;
 
+    private VentaProducto ventaProducto;
     public ClienteDTO() {
     }
 
-    public ClienteDTO(String nombre, String domicilio, int dni) {
+    
+    public ClienteDTO(String nombre, String domicilio, int dni, VentaProducto ventaProducto) {
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.dni = dni;
+        this.ventaProducto = ventaProducto;
     }
+
 
     public String getNombre() {
         return nombre;
@@ -44,6 +48,16 @@ public class ClienteDTO {
 
     public void setDomicilio(String domicilio) {
         this.domicilio = domicilio;
+    }
+
+
+    public VentaProducto getVentaProducto() {
+        return ventaProducto;
+    }
+
+
+    public void setVentaProducto(VentaProducto ventaProducto) {
+        this.ventaProducto = ventaProducto;
     }
 
 }

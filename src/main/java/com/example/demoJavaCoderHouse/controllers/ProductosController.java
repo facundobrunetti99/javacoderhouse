@@ -1,6 +1,5 @@
 package com.example.demoJavaCoderHouse.controllers;
 
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demoJavaCoderHouse.models.ProductoDTO;
 import com.example.demoJavaCoderHouse.models.producto;
-import com.example.demoJavaCoderHouse.repository.ProductoRepository;
 import com.example.demoJavaCoderHouse.service.ProductoService;
 
 @RestController
 public class ProductosController {
     @Autowired
     private ProductoService prodService;
-
 
     @GetMapping("/productos")
     public Set<ProductoDTO> getClientes() {
@@ -36,12 +33,12 @@ public class ProductosController {
 
     @PutMapping("producto/modificar/{id}")
     public String update(@PathVariable Long id, @RequestBody producto prod) {
-       prodService.ActualizarProducto(id, prod);
+        prodService.ActualizarProducto(id, prod);
         return "Se realizo el cambio";
     }
 
     @DeleteMapping("producto/eliminar/{id}")
-    public String delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id) {
         prodService.EliminarProducto(id);
         return "El producto se elimino correctamente";
     }

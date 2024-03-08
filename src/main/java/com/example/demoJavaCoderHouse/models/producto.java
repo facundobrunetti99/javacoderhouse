@@ -1,5 +1,8 @@
 package com.example.demoJavaCoderHouse.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +32,12 @@ public class producto {
     private float priceproduct;
     @Column(name = "cantproduct")
     private int cantproduct;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    private VentaProducto ventaProducto;
 
+  
     public int getCantproduct() {
         return cantproduct;
     }
@@ -82,7 +90,5 @@ public class producto {
     public producto() {
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private VentaProducto ventaProducto;
-
+    
 }

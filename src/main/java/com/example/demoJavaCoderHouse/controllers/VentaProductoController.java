@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demoJavaCoderHouse.models.VentaProducto;
 
-import com.example.demoJavaCoderHouse.repository.VentaProductoRepository;
 import com.example.demoJavaCoderHouse.service.VentaService;
 
 @RestController
@@ -33,14 +32,14 @@ public class VentaProductoController {
     }
 
     @DeleteMapping("venta/eliminar/{id}")
-    public String delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id) {
         ventaservice.EliminarVenta(id);
 
         return "Venta eliminada";
     }
 
     @PutMapping("venta/actualizar/{id}")
-    public String update(@PathVariable Long id, @RequestBody VentaProducto ventaprod){
+    public String update(@PathVariable Long id, @RequestBody VentaProducto ventaprod) {
         ventaservice.ActualizarVenta(id, ventaprod);
         return "Actualizacion confirmada";
     }

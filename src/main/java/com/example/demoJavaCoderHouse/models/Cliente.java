@@ -1,5 +1,8 @@
 package com.example.demoJavaCoderHouse.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,8 +10,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +20,7 @@ import jakarta.persistence.Table;
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     @Schema(description = "id usuario autogestionado por la BBDD", requiredMode = Schema.RequiredMode.AUTO, example = "2")
     private Long id;
 
@@ -33,10 +38,15 @@ public class Cliente {
     @Schema(description = "Fecha de nacimiento", requiredMode = Schema.RequiredMode.REQUIRED, example = "13-05-1990")
     @Column(name = "FechaNac")
     private String FechaNac;
+       
+   @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    private VentaProducto ventaProducto;
+  
 
- 
-
-
+    public VentaProducto getVentaProducto() {
+        return ventaProducto;
+    }
     public String getClienteNombre() {
         return clienteNombre;
     }
@@ -61,7 +71,6 @@ public class Cliente {
         FechaNac = fechaNac;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -78,16 +87,23 @@ public class Cliente {
         this.clienteDni = clienteDni;
     }
 
-    public Cliente() {
-    }
-
-    public Cliente(Long id, String clienteNombre, String clienteDomicilio, int clienteDni, String fechaNac) {
+    public Cliente(Long id, String clienteNombre, String clienteDomicilio, int clienteDni, String fechaNac,
+            VentaProducto ventaProducto) {
         this.id = id;
         this.clienteNombre = clienteNombre;
         this.clienteDomicilio = clienteDomicilio;
         this.clienteDni = clienteDni;
-        FechaNac = fechaNac;
-      
+        this.FechaNac = fechaNac;
+        this.ventaProducto = ventaProducto;
     }
+
+    public Cliente() {
+    }
+ 
+
+    public void setVentaProducto(VentaProducto ventaProducto) {
+        this.ventaProducto = ventaProducto;
+    }
+
 
 }

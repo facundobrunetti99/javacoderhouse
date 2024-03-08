@@ -1,8 +1,13 @@
 package com.example.demoJavaCoderHouse.models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +15,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -27,23 +32,30 @@ public class VentaProducto {
     @Column(name = "ventafecha")
     private String ventafecha;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "ventaProducto")
-    private Set<producto> productos = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "ventaProducto")
 
-    @OneToOne(mappedBy = "ventaProducto",cascade = CascadeType.ALL)
-    private Cliente cliente;
+    private Set<producto> productos = new HashSet<>();
+ 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "ventaProducto")
+   
+    private Set<Cliente> clientes = new HashSet<>();
+  
 
     public VentaProducto() {
     }
 
+   
+
     public VentaProducto(Long ventaId, float ventamontoTotal, String ventafecha, Set<producto> productos,
-            Cliente cliente) {
+            Set<Cliente> clientes) {
         this.ventaId = ventaId;
         this.ventamontoTotal = ventamontoTotal;
         this.ventafecha = ventafecha;
         this.productos = productos;
-        this.cliente = cliente;
+        this.clientes = clientes;
     }
+
+
 
     public Long getVentaId() {
         return ventaId;
@@ -77,13 +89,17 @@ public class VentaProducto {
         this.productos = productos;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    
+   
+    public Set<Cliente> getClientes() {
+        return clientes;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
- 
 
+
+    public void setClientes(Set<Cliente> clientes) {
+        this.clientes = clientes;
+    }
+
+  
 }

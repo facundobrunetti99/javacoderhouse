@@ -1,11 +1,9 @@
 package com.example.demoJavaCoderHouse.controllers;
 
-import java.util.List;
-import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demoJavaCoderHouse.models.Cliente;
 import com.example.demoJavaCoderHouse.models.ClienteDTO;
-import com.example.demoJavaCoderHouse.models.producto;
-import com.example.demoJavaCoderHouse.repository.ClienteRepository;
 import com.example.demoJavaCoderHouse.service.ClienteService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,7 +26,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 public class ClienteController {
     @Autowired
     ClienteService clienteService;
-    
 
     @Operation(summary = "Lista clientes", description = "Lista todos los clientes existentes en la BBDD")
     @GetMapping("/clientes")
@@ -54,12 +49,12 @@ public class ClienteController {
 
     @PutMapping("cliente/modificar/{id}")
     public String update(@PathVariable Long id, @RequestBody Cliente cliente) {
-      clienteService.ActualizarCliente(id, cliente);
-      return "El cliente se actualizo correctamente";
+        clienteService.ActualizarCliente(id, cliente);
+        return "El cliente se actualizo correctamente";
     }
 
     @DeleteMapping("cliente/eliminar/{id}")
-    public String delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id) {
         clienteService.EliminarCliente(id);
         return "El cliente se elimino con exito";
     }
